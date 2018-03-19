@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>如果不允许，您将无法使用系统相机功能。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>如果不允许，您将无法访问系统相册里的照片。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

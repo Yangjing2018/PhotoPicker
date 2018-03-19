@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39413869205BC4A800CE1C7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39413868205BC4A800CE1C7F /* AppDelegate.m */; };
-		3941386C205BC4A800CE1C7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3941386B205BC4A800CE1C7F /* ViewController.m */; };
-		3941386F205BC4A800CE1C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3941386D205BC4A800CE1C7F /* Main.storyboard */; };
-		39413871205BC4A800CE1C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39413870205BC4A800CE1C7F /* Assets.xcassets */; };
-		39413874205BC4A800CE1C7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39413872205BC4A800CE1C7F /* LaunchScreen.storyboard */; };
-		39413877205BC4A800CE1C7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39413876205BC4A800CE1C7F /* main.m */; };
 		39413881205BC4A800CE1C7F /* Project2_PhotoPicker_OCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39413880205BC4A800CE1C7F /* Project2_PhotoPicker_OCTests.m */; };
 		3941388C205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3941388B205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m */; };
+		3993D818205F87FF00B15D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80B205F87FE00B15D90 /* Assets.xcassets */; };
+		3993D819205F87FF00B15D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80C205F87FE00B15D90 /* LaunchScreen.storyboard */; };
+		3993D81A205F87FF00B15D90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80E205F87FE00B15D90 /* Main.storyboard */; };
+		3993D81B205F87FF00B15D90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D810205F87FE00B15D90 /* main.m */; };
+		3993D81D205F87FF00B15D90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D814205F87FE00B15D90 /* AppDelegate.m */; };
+		3993D82F205F89B200B15D90 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D82E205F89B200B15D90 /* MainController.m */; };
+		3993D834205F9BA900B15D90 /* PhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D833205F9BA800B15D90 /* PhotoPickerController.m */; };
+		3993D837205F9CC700B15D90 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D836205F9CC700B15D90 /* PhotoModel.m */; };
+		3993D83A205F9CF500B15D90 /* AlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D839205F9CF500B15D90 /* AlbumModel.m */; };
+		3993D83D205F9D1F00B15D90 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D83C205F9D1F00B15D90 /* VideoModel.m */; };
+		3993D841205F9DA000B15D90 /* AlbumListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D840205F9DA000B15D90 /* AlbumListController.m */; };
+		3993D844205F9DDE00B15D90 /* PhotoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D843205F9DDE00B15D90 /* PhotoListController.m */; };
+		3993D847205F9E1200B15D90 /* PhotoPerviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D846205F9E1200B15D90 /* PhotoPerviewController.m */; };
+		3993D84C205F9F2C00B15D90 /* PhotoPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3993D84B205F9F2C00B15D90 /* PhotoPickerManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,21 +44,38 @@
 
 /* Begin PBXFileReference section */
 		39413864205BC4A800CE1C7F /* Project2-PhotoPicker-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project2-PhotoPicker-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		39413867205BC4A800CE1C7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		39413868205BC4A800CE1C7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3941386A205BC4A800CE1C7F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3941386B205BC4A800CE1C7F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3941386E205BC4A800CE1C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		39413870205BC4A800CE1C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		39413873205BC4A800CE1C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		39413875205BC4A800CE1C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39413876205BC4A800CE1C7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3941387C205BC4A800CE1C7F /* Project2-PhotoPicker-OCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project2-PhotoPicker-OCTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39413880205BC4A800CE1C7F /* Project2_PhotoPicker_OCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project2_PhotoPicker_OCTests.m; sourceTree = "<group>"; };
 		39413882205BC4A800CE1C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39413887205BC4A800CE1C7F /* Project2-PhotoPicker-OCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project2-PhotoPicker-OCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3941388B205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project2_PhotoPicker_OCUITests.m; sourceTree = "<group>"; };
 		3941388D205BC4A800CE1C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3993D80B205F87FE00B15D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3993D80D205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3993D80F205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3993D810205F87FE00B15D90 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3993D811205F87FE00B15D90 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3993D813205F87FE00B15D90 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3993D814205F87FE00B15D90 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3993D82D205F89B200B15D90 /* MainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		3993D82E205F89B200B15D90 /* MainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		3993D832205F9BA800B15D90 /* PhotoPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPickerController.h; sourceTree = "<group>"; };
+		3993D833205F9BA800B15D90 /* PhotoPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerController.m; sourceTree = "<group>"; };
+		3993D835205F9CC700B15D90 /* PhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
+		3993D836205F9CC700B15D90 /* PhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
+		3993D838205F9CF500B15D90 /* AlbumModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumModel.h; sourceTree = "<group>"; };
+		3993D839205F9CF500B15D90 /* AlbumModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumModel.m; sourceTree = "<group>"; };
+		3993D83B205F9D1F00B15D90 /* VideoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		3993D83C205F9D1F00B15D90 /* VideoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
+		3993D83F205F9DA000B15D90 /* AlbumListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumListController.h; sourceTree = "<group>"; };
+		3993D840205F9DA000B15D90 /* AlbumListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumListController.m; sourceTree = "<group>"; };
+		3993D842205F9DDE00B15D90 /* PhotoListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoListController.h; sourceTree = "<group>"; };
+		3993D843205F9DDE00B15D90 /* PhotoListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoListController.m; sourceTree = "<group>"; };
+		3993D845205F9E1200B15D90 /* PhotoPerviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPerviewController.h; sourceTree = "<group>"; };
+		3993D846205F9E1200B15D90 /* PhotoPerviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoPerviewController.m; sourceTree = "<group>"; };
+		3993D849205F9E9300B15D90 /* PhotoPickerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPickerDelegate.h; sourceTree = "<group>"; };
+		3993D84A205F9F2C00B15D90 /* PhotoPickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPickerManager.h; sourceTree = "<group>"; };
+		3993D84B205F9F2C00B15D90 /* PhotoPickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +106,7 @@
 		3941385B205BC4A700CE1C7F = {
 			isa = PBXGroup;
 			children = (
-				39413866205BC4A800CE1C7F /* Project2-PhotoPicker-OC */,
+				3993D809205F87FE00B15D90 /* Project2-PhotoPicker-OC */,
 				3941387F205BC4A800CE1C7F /* Project2-PhotoPicker-OCTests */,
 				3941388A205BC4A800CE1C7F /* Project2-PhotoPicker-OCUITests */,
 				39413865205BC4A800CE1C7F /* Products */,
@@ -96,22 +121,6 @@
 				39413887205BC4A800CE1C7F /* Project2-PhotoPicker-OCUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		39413866205BC4A800CE1C7F /* Project2-PhotoPicker-OC */ = {
-			isa = PBXGroup;
-			children = (
-				39413867205BC4A800CE1C7F /* AppDelegate.h */,
-				39413868205BC4A800CE1C7F /* AppDelegate.m */,
-				3941386A205BC4A800CE1C7F /* ViewController.h */,
-				3941386B205BC4A800CE1C7F /* ViewController.m */,
-				3941386D205BC4A800CE1C7F /* Main.storyboard */,
-				39413870205BC4A800CE1C7F /* Assets.xcassets */,
-				39413872205BC4A800CE1C7F /* LaunchScreen.storyboard */,
-				39413875205BC4A800CE1C7F /* Info.plist */,
-				39413876205BC4A800CE1C7F /* main.m */,
-			);
-			path = "Project2-PhotoPicker-OC";
 			sourceTree = "<group>";
 		};
 		3941387F205BC4A800CE1C7F /* Project2-PhotoPicker-OCTests */ = {
@@ -130,6 +139,199 @@
 				3941388D205BC4A800CE1C7F /* Info.plist */,
 			);
 			path = "Project2-PhotoPicker-OCUITests";
+			sourceTree = "<group>";
+		};
+		3993D809205F87FE00B15D90 /* Project2-PhotoPicker-OC */ = {
+			isa = PBXGroup;
+			children = (
+				3993D812205F87FE00B15D90 /* AppDelegate */,
+				3993D816205F87FE00B15D90 /* Modules */,
+				3993D815205F87FE00B15D90 /* Resource */,
+				3993D80A205F87FE00B15D90 /* Support Files */,
+			);
+			path = "Project2-PhotoPicker-OC";
+			sourceTree = "<group>";
+		};
+		3993D80A205F87FE00B15D90 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3993D80B205F87FE00B15D90 /* Assets.xcassets */,
+				3993D80C205F87FE00B15D90 /* LaunchScreen.storyboard */,
+				3993D80E205F87FE00B15D90 /* Main.storyboard */,
+				3993D810205F87FE00B15D90 /* main.m */,
+				3993D811205F87FE00B15D90 /* Info.plist */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		3993D812205F87FE00B15D90 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3993D813205F87FE00B15D90 /* AppDelegate.h */,
+				3993D814205F87FE00B15D90 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		3993D815205F87FE00B15D90 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		3993D816205F87FE00B15D90 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3993D81E205F899B00B15D90 /* Album */,
+				3993D823205F899C00B15D90 /* Camera */,
+				3993D828205F899C00B15D90 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3993D81E205F899B00B15D90 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				3993D83E205F9D6200B15D90 /* Core */,
+				3993D81F205F899B00B15D90 /* ViewModel */,
+				3993D820205F899B00B15D90 /* Controller */,
+				3993D821205F899B00B15D90 /* Model */,
+				3993D822205F899B00B15D90 /* View */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		3993D81F205F899B00B15D90 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3993D820205F899B00B15D90 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3993D832205F9BA800B15D90 /* PhotoPickerController.h */,
+				3993D833205F9BA800B15D90 /* PhotoPickerController.m */,
+				3993D83F205F9DA000B15D90 /* AlbumListController.h */,
+				3993D840205F9DA000B15D90 /* AlbumListController.m */,
+				3993D842205F9DDE00B15D90 /* PhotoListController.h */,
+				3993D843205F9DDE00B15D90 /* PhotoListController.m */,
+				3993D845205F9E1200B15D90 /* PhotoPerviewController.h */,
+				3993D846205F9E1200B15D90 /* PhotoPerviewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3993D821205F899B00B15D90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3993D835205F9CC700B15D90 /* PhotoModel.h */,
+				3993D836205F9CC700B15D90 /* PhotoModel.m */,
+				3993D838205F9CF500B15D90 /* AlbumModel.h */,
+				3993D839205F9CF500B15D90 /* AlbumModel.m */,
+				3993D83B205F9D1F00B15D90 /* VideoModel.h */,
+				3993D83C205F9D1F00B15D90 /* VideoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3993D822205F899B00B15D90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3993D823205F899C00B15D90 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				3993D824205F899C00B15D90 /* ViewModel */,
+				3993D825205F899C00B15D90 /* Controller */,
+				3993D826205F899C00B15D90 /* Model */,
+				3993D827205F899C00B15D90 /* View */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		3993D824205F899C00B15D90 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3993D825205F899C00B15D90 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3993D826205F899C00B15D90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3993D827205F899C00B15D90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3993D828205F899C00B15D90 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3993D829205F899C00B15D90 /* ViewModel */,
+				3993D82A205F899C00B15D90 /* Controller */,
+				3993D82B205F899C00B15D90 /* Model */,
+				3993D82C205F899C00B15D90 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3993D829205F899C00B15D90 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3993D82A205F899C00B15D90 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3993D82D205F89B200B15D90 /* MainController.h */,
+				3993D82E205F89B200B15D90 /* MainController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3993D82B205F899C00B15D90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3993D82C205F899C00B15D90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3993D83E205F9D6200B15D90 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3993D849205F9E9300B15D90 /* PhotoPickerDelegate.h */,
+				3993D84A205F9F2C00B15D90 /* PhotoPickerManager.h */,
+				3993D84B205F9F2C00B15D90 /* PhotoPickerManager.m */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,9 +440,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39413874205BC4A800CE1C7F /* LaunchScreen.storyboard in Resources */,
-				39413871205BC4A800CE1C7F /* Assets.xcassets in Resources */,
-				3941386F205BC4A800CE1C7F /* Main.storyboard in Resources */,
+				3993D81A205F87FF00B15D90 /* Main.storyboard in Resources */,
+				3993D818205F87FF00B15D90 /* Assets.xcassets in Resources */,
+				3993D819205F87FF00B15D90 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +467,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3941386C205BC4A800CE1C7F /* ViewController.m in Sources */,
-				39413877205BC4A800CE1C7F /* main.m in Sources */,
-				39413869205BC4A800CE1C7F /* AppDelegate.m in Sources */,
+				3993D81D205F87FF00B15D90 /* AppDelegate.m in Sources */,
+				3993D841205F9DA000B15D90 /* AlbumListController.m in Sources */,
+				3993D837205F9CC700B15D90 /* PhotoModel.m in Sources */,
+				3993D82F205F89B200B15D90 /* MainController.m in Sources */,
+				3993D834205F9BA900B15D90 /* PhotoPickerController.m in Sources */,
+				3993D84C205F9F2C00B15D90 /* PhotoPickerManager.m in Sources */,
+				3993D844205F9DDE00B15D90 /* PhotoListController.m in Sources */,
+				3993D81B205F87FF00B15D90 /* main.m in Sources */,
+				3993D847205F9E1200B15D90 /* PhotoPerviewController.m in Sources */,
+				3993D83D205F9D1F00B15D90 /* VideoModel.m in Sources */,
+				3993D83A205F9CF500B15D90 /* AlbumModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,20 +513,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3941386D205BC4A800CE1C7F /* Main.storyboard */ = {
+		3993D80C205F87FE00B15D90 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3941386E205BC4A800CE1C7F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		39413872205BC4A800CE1C7F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39413873205BC4A800CE1C7F /* Base */,
+				3993D80D205F87FE00B15D90 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3993D80E205F87FE00B15D90 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3993D80F205F87FE00B15D90 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -432,7 +642,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7S6VUPM23;
-				INFOPLIST_FILE = "Project2-PhotoPicker-OC/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Project2-PhotoPicker-OC/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yangjing.Project2-PhotoPicker-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -446,7 +657,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7S6VUPM23;
-				INFOPLIST_FILE = "Project2-PhotoPicker-OC/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Project2-PhotoPicker-OC/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "yangjing.Project2-PhotoPicker-OC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

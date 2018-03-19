@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  PhotoListController.h
 //  Project2-PhotoPicker-OC
 //
-//  Created by YangJing on 2018/3/16.
+//  Created by YangJing on 2018/3/19.
 //  Copyright © 2018年 YangJing. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface PhotoListController : UIViewController
 
 @end
-
