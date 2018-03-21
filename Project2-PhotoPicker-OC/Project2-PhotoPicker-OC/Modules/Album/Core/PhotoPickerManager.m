@@ -48,7 +48,6 @@
         }
         [albums enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             PHAssetCollection *collection = (PHAssetCollection *)obj;
-            NSLog(@"yangjing_album: collection = %@", collection.localizedTitle);
 
             PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
             // 按图片生成时间排序
