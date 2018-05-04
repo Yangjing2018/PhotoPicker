@@ -12,6 +12,7 @@
 		39729E3D209C375800273496 /* AlbumListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E3C209C375800273496 /* AlbumListCell.m */; };
 		39729E40209C4E1600273496 /* PhotoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E3F209C4E1600273496 /* PhotoListCell.m */; };
 		39729E43209C560200273496 /* VideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E42209C560200273496 /* VideoListCell.m */; };
+		39729E46209C629F00273496 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E45209C629F00273496 /* PhotoCell.m */; };
 		3993D818205F87FF00B15D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80B205F87FE00B15D90 /* Assets.xcassets */; };
 		3993D819205F87FF00B15D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80C205F87FE00B15D90 /* LaunchScreen.storyboard */; };
 		3993D81A205F87FF00B15D90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80E205F87FE00B15D90 /* Main.storyboard */; };
@@ -61,6 +62,8 @@
 		39729E3F209C4E1600273496 /* PhotoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoListCell.m; sourceTree = "<group>"; };
 		39729E41209C560200273496 /* VideoListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoListCell.h; sourceTree = "<group>"; };
 		39729E42209C560200273496 /* VideoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoListCell.m; sourceTree = "<group>"; };
+		39729E44209C629F00273496 /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		39729E45209C629F00273496 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		3993D80B205F87FE00B15D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3993D80D205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3993D80F205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 				39729E3F209C4E1600273496 /* PhotoListCell.m */,
 				39729E41209C560200273496 /* VideoListCell.h */,
 				39729E42209C560200273496 /* VideoListCell.m */,
+				39729E44209C629F00273496 /* PhotoCell.h */,
+				39729E45209C629F00273496 /* PhotoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -553,6 +558,7 @@
 				3993D837205F9CC700B15D90 /* PhotoModel.m in Sources */,
 				39729E3D209C375800273496 /* AlbumListCell.m in Sources */,
 				3993D82F205F89B200B15D90 /* MainController.m in Sources */,
+				39729E46209C629F00273496 /* PhotoCell.m in Sources */,
 				3993D834205F9BA900B15D90 /* PhotoPickerController.m in Sources */,
 				3993D84C205F9F2C00B15D90 /* PhotoPickerManager.m in Sources */,
 				3993D844205F9DDE00B15D90 /* PhotoListController.m in Sources */,
