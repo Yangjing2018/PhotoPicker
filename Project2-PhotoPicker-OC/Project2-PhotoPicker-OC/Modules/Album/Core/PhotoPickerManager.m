@@ -119,6 +119,41 @@
     });
 }
 
+- (void)photosWithFetch:(PHFetchResult *)fetchResult Page:(NSInteger)page Limit:(NSInteger)limit Success:(void(^)(NSArray *result))success {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSMutableArray *photos = [[NSMutableArray alloc] init];
+        NSInteger photoCount = limit;
+        if (page*limit > fetchResult.count) {
+            photoCount = fetchResult.count - ((page-1)*limit);
+        }
+        
+        for (NSInteger i = 0; i < photoCount; i++) {
+            PHAsset *asset = [fetchResult objectAtIndex:i+(page-1)*limit];
+            if (asset.mediaType == PHAssetMediaTypeImage) {
+                PhotoModel *model = [PhotoModel new];
+                model.asset = asset;
+                model.selected = NO;
+                [photos addObject:model];
+                
+            } else if (asset.mediaType == PHAssetMediaTypeVideo) {
+                //                VideoModel *model = [[VideoModel alloc] init];
+                //                model.asset = asset;
+                //                model.duration = asset.duration;
+                //                [photos addObject:model];
+                
+            }
+            if (i == (photoCount-1) && success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(photos);
+                });
+            }
+        }
+    });
+}
+
+//MARK: - load image
 //加载图片(图片尺寸：接近或稍微大于指定尺寸；图片质量：在速度与质量中均衡)
 - (void)loadImageWithAssets:(PHAsset *)asset targetSize:(CGSize)targetSize success:(void(^)(UIImage *result))success {
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];

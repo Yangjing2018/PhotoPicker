@@ -9,6 +9,7 @@
 #import "AlbumListController.h"
 #import "PhotoPickerManager.h"
 #import "AlbumListCell.h"
+#import "PhotoListController.h"
 
 @interface AlbumListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -72,6 +73,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+    PhotoListController *subVC = [[PhotoListController alloc] init];
+    subVC.model = self.dataArray[indexPath.row];
+    [self.navigationController pushViewController:subVC animated:YES];
 }
 
 //MARK: - configSubviews

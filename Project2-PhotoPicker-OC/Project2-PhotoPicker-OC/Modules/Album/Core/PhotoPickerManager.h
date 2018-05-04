@@ -22,6 +22,8 @@
  */
 - (void)allAlbumsIfRefresh:(BOOL)refresh success:(void(^)(NSArray <AlbumModel *>*result))success failure:(void(^)(void))failure;
 
+- (void)photosWithFetch:(PHFetchResult *)fetchResult Page:(NSInteger)page Limit:(NSInteger)limit Success:(void(^)(NSArray *result))success;
+
 /**
  *  加载图片
  *  (图片尺寸：接近或稍微大于指定尺寸；图片质量：在速度与质量中均衡)

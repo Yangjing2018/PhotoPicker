@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlbumModel.h"
 
 @interface PhotoListController : UIViewController
+
+@property (nonatomic, strong) AlbumModel *model;
 
 @end
