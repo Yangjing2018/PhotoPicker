@@ -11,6 +11,7 @@
 
 @implementation PhotoPickerManager {
     NSMutableArray *_albumDatasArray;
+    PHCachingImageManager *_imageManager;
 }
 
 + (PhotoPickerManager *)manager {
@@ -26,6 +27,8 @@
     self = [super init];
     if (self) {
         _albumDatasArray = [[NSMutableArray alloc] init];
+        _imageManager = [[PHCachingImageManager alloc] init];
+        _imageManager.allowsCachingHighQualityImages = YES;
     }
     return self;
 }
@@ -193,7 +196,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:targetSize   contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        [_imageManager requestImageForAsset:asset targetSize:targetSize   contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (success) success(result);
@@ -201,7 +204,6 @@
             });
         }];
     });
-    
 }
 
 //MARK: - getter
