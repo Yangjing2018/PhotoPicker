@@ -15,6 +15,10 @@
 
 @property (nonatomic, assign) NSInteger photoCount;
 
-@property (nonatomic, strong) PHFetchResult<PHAsset *> *phFetch;
+@property (nonatomic, copy) PHAssetCollection *collection;
+
+@property (nonatomic, copy) PHFetchResult <PHAsset *>*fetchResult;
+
+- (instancetype)initWithPHAssetCollection:(PHAssetCollection *)collection;
 
 @end

@@ -10,4 +10,19 @@
 
 @implementation AlbumModel
 
+- (instancetype)initWithPHAssetCollection:(PHAssetCollection *)collection {
+    self = [super init];
+    if (self) {
+        self.collection = collection;
+        self.title = collection.localizedTitle;
+        
+        PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
+        photosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+        
+        self.fetchResult = [PHAsset fetchAssetsInAssetCollection:self.collection options:photosOptions];
+        self.photoCount = self.fetchResult.count;
+    }
+    return self;
+}
+
 @end

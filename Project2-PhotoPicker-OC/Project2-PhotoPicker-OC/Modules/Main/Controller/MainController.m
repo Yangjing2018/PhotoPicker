@@ -8,6 +8,7 @@
 
 #import "MainController.h"
 #import "PhotoPickerManager.h"
+#import "AlbumListController.h"
 
 @interface MainController ()
 
@@ -30,9 +31,8 @@
 
 //MARK: - private methods
 - (void)albumAction:(id)sender {
-    [[PhotoPickerManager manager] allAlbumsSuccess:^(NSArray<AlbumModel *> *result) {
-        
-    }];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[AlbumListController new]] animated:YES completion:nil];
+    
 }
 
 - (void)cameraAction:(id)sender {
