@@ -10,10 +10,19 @@
 #import "PhotoModel.h"
 #define PhotoListCellID @"PhotoListCellID"
 
+@class PhotoListCell;
+@protocol PhotoListCellDelegate <NSObject>
+
+- (void)photoListCell:(PhotoListCell *)cell didSelectePhoto:(PhotoModel *)model;
+
+@end
+
 @interface PhotoListCell : UICollectionViewCell
 
 @property (nonatomic, strong) PhotoModel *model;
 
-@property (nonatomic, assign) BOOL isSelected;
+@property (nonatomic, assign) NSInteger selectedIndex;
+
+@property (nonatomic, weak) id <PhotoListCellDelegate> delegate;
 
 @end

@@ -80,7 +80,6 @@
                 albumModel.fetchResult = fetchResult;
                 [_albumDatasArray addObject:albumModel];
             }
-
             
             if (idx == _albumDatasArray.count-1) {
                 dispatch_semaphore_signal(semaphore);
@@ -137,7 +136,6 @@
             if (asset.mediaType == PHAssetMediaTypeImage) {
                 PhotoModel *model = [PhotoModel new];
                 model.asset = asset;
-                model.selected = NO;
                 [photos addObject:model];
                 
             } else if (asset.mediaType == PHAssetMediaTypeVideo) {
@@ -197,6 +195,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         [_imageManager requestImageForAsset:asset targetSize:targetSize   contentMode:PHImageContentModeDefault options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            
+            NSLog(@"yangjing_%@: info = %@", NSStringFromClass([self class]), info);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (success) success(result);

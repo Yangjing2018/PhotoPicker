@@ -46,34 +46,54 @@
     self.selectedBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn addTarget:self action:@selector(photoSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setBackgroundImage:[UIImage imageNamed:@"photo_def_photoPickerVc"] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:@"photo_sel_photoPickerVc"] forState:UIControlStateSelected];
-        btn.selected = model.selected;
+        btn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        btn.layer.cornerRadius = 13;
+        btn.layer.borderColor = [UIColor whiteColor].CGColor;
+        btn.layer.borderWidth = 1;
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        btn.selected = model.selectedIndex > 0;
         btn;
     });
     [self.contentView addSubview:self.selectedBtn];
     self.selectedBtn.frame = CGRectMake(itemWidth-26-5, 5, 26, 26);
+    self.selectedIndex = model.selectedIndex;
 }
 
-- (void)setIsSelected:(BOOL)isSelected {
-    _isSelected = isSelected;
-    _model.selected = !_model.selected;
-    self.selectedBtn.selected = !self.selectedBtn.selected;
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+
+    self.model.selectedIndex = selectedIndex;
+    self.selectedBtn.selected = selectedIndex > 0;
     
-    if (!_model.selected) {
-        _model.orgImage = nil;
-        return;
+    if (selectedIndex > 0) {
+        self.selectedBtn.backgroundColor = [UIColor blueColor];
+        self.selectedBtn.layer.borderWidth = 0;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)selectedIndex] forState:UIControlStateSelected];
+        
+        if (_selectedIndex <= 0) {
+            self.selectedBtn.transform = CGAffineTransformMakeScale(0, 0);
+            [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.selectedBtn.transform = CGAffineTransformIdentity;
+                
+            } completion:^(BOOL finished) {
+                self.selectedBtn.transform = CGAffineTransformIdentity;
+                
+            }];
+        }
+
+    } else {
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        self.selectedBtn.layer.borderWidth = 1;
+        [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
     }
     
-//    [[AlbumManager manager] loadImageWithAssets:_model.asset maxSize:CGSizeMake(kScreenWidth, kScreenHeight) Success:^(UIImage *result) {
-//        _model.orgImage = [UIImage thumbnailImage:result maxSize:CGSizeMake(kScreenWidth, kScreenHeight)];
-//    }];
+    _selectedIndex = selectedIndex;
 }
 
 - (void)photoSelected:(UIButton *)btn {
-//    if (!self.delegate) return;
-//    if (![self.delegate respondsToSelector:@selector(photoCell:didSelected:)]) return;
-//    [self.delegate photoCell:self didSelected:_model];
+    if (!self.delegate) return;
+    if (![self.delegate respondsToSelector:@selector(photoListCell:didSelectePhoto:)]) return;
+    [self.delegate photoListCell:self didSelectePhoto:self.model];
 }
 
 - (void)dealloc {

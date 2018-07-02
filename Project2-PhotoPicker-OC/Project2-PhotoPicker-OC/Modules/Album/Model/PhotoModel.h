@@ -27,8 +27,9 @@
 @property (nonatomic, strong) UIImage *orgImage;
 
 /**
- *  是否选中
+ *  选中序号
+ *  0 为未选中
  */
-@property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @end
