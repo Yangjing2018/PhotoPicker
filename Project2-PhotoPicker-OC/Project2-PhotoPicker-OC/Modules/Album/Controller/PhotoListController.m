@@ -11,6 +11,8 @@
 #import "MJRefresh.h"
 #import "PhotoListCell.h"
 
+#define MAXPHOTOCOUNT   9
+
 @interface PhotoListController () <UICollectionViewDelegate, UICollectionViewDataSource, PhotoListCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -119,22 +121,30 @@
                 [indexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
             }
         }
-        [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+        if (self.selectedArray.count >= MAXPHOTOCOUNT-1) {
+            [self.collectionView reloadData];
+
+        } else {
+            [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+
+        }
         
     } else {
         if ([self.selectedArray containsObject:model]) {
             NSLog(@"yangjing_%@: data error", NSStringFromClass([self class]));
 
         } else {
-            if (self.selectedArray.count >= 9) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"一次最多选择9张图片" preferredStyle:UIAlertControllerStyleAlert];
+            if (self.selectedArray.count >= MAXPHOTOCOUNT) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"一次最多选择%d张图片", MAXPHOTOCOUNT] preferredStyle:UIAlertControllerStyleAlert];
                 [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil]];
                 [self presentViewController:alert animated:YES completion:nil];
                 return;
                 
             } else {
                 [self.selectedArray addObject:model];
-
+                if (self.selectedArray.count >= MAXPHOTOCOUNT) {
+                    [self.collectionView reloadData];
+                }
             }
         }
         
@@ -152,6 +162,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoListCellID forIndexPath:indexPath];
     cell.delegate = self;
+    cell.shouldMask = self.selectedArray.count >= MAXPHOTOCOUNT;
     cell.model = self.dataArray[indexPath.row];
     return cell;
 }

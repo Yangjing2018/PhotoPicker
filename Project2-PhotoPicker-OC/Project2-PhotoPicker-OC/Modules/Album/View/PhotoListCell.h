@@ -23,6 +23,8 @@
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 
+@property (nonatomic, assign) NSInteger shouldMask;
+
 @property (nonatomic, weak) id <PhotoListCellDelegate> delegate;
 
 @end

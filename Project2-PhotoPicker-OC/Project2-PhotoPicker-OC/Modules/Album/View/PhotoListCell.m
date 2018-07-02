@@ -43,11 +43,21 @@
         });
     }];
     
+    if (self.shouldMask && model.selectedIndex <= 0) {
+        UIView *coverView = ({
+            UIView *view = [[UIView alloc] init];
+            view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+            view;
+        });
+        [self.contentView addSubview:coverView];
+        coverView.frame = CGRectMake(0, 0, itemWidth, itemWidth);
+    }
+    
     self.selectedBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn addTarget:self action:@selector(photoSelected:) forControlEvents:UIControlEventTouchUpInside];
         btn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
-        btn.layer.cornerRadius = 13;
+        btn.layer.cornerRadius = 12;
         btn.layer.borderColor = [UIColor whiteColor].CGColor;
         btn.layer.borderWidth = 1;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -56,8 +66,22 @@
         btn;
     });
     [self.contentView addSubview:self.selectedBtn];
-    self.selectedBtn.frame = CGRectMake(itemWidth-26-5, 5, 26, 26);
-    self.selectedIndex = model.selectedIndex;
+    self.selectedBtn.frame = CGRectMake(itemWidth-24-5, 6, 24, 24);
+
+    self.selectedBtn.selected = model.selectedIndex > 0;
+    
+    if (model.selectedIndex > 0) {
+        self.selectedBtn.backgroundColor = [UIColor blueColor];
+        self.selectedBtn.layer.borderWidth = 0;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
+        
+    } else {
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        self.selectedBtn.layer.borderWidth = 1;
+        [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
+    }
+    
+    _selectedIndex = model.selectedIndex;
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
