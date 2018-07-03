@@ -96,23 +96,14 @@
 //MARK: - collectionViewDelegate
 
 //MARK: - scrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (![scrollView isEqual:self.collectionView]) return;
     
-    self.currentIndex = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
+    NSInteger index = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
+    if (self.currentIndex == index) return;
     
+    self.currentIndex = index;
     [self checkTopView];
-
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (![scrollView isEqual:self.collectionView]) return;
-
-    if (!decelerate) {
-        self.currentIndex = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
-
-        [self checkTopView];
-    }
 }
 
 - (void)addSubview {
@@ -153,7 +144,7 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, CGRectGetWidth([UIScreen mainScreen].bounds)+20, CGRectGetHeight([UIScreen mainScreen].bounds)) collectionViewLayout:self.layout];
-        _collectionView.backgroundColor = [UIColor redColor];
+        _collectionView.backgroundColor = [UIColor blackColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;

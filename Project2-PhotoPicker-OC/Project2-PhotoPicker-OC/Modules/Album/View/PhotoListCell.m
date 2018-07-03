@@ -46,7 +46,7 @@
     if (self.shouldMask && model.selectedIndex <= 0) {
         UIView *coverView = ({
             UIView *view = [[UIView alloc] init];
-            view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+            view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
             view;
         });
         [self.contentView addSubview:coverView];
