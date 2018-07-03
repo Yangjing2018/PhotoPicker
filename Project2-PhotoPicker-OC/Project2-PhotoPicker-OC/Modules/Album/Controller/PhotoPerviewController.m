@@ -6,9 +6,23 @@
 //  Copyright © 2018年 YangJing. All rights reserved.
 //
 
+#import "PhotoCell.h"
+
 #import "PhotoPerviewController.h"
 
-@interface PhotoPerviewController ()
+@interface PhotoPerviewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+
+@property (nonatomic, strong) UIButton *selectedBtn;
+
+@property (nonatomic, strong) UIView *bottomView;
+
+@property (nonatomic, strong) UIButton *confirmBtn;
 
 @end
 
@@ -16,22 +30,174 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self addSubview];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
-*/
+
+//MARK: - private methods
+- (void)photoSelectedAction:(UIButton *)btn {
+    
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap {
+    self.bottomView.hidden = !self.bottomView.hidden;
+
+    if (self.bottomView.hidden) {
+        self.navigationController.navigationBar.hidden = YES;
+
+    } else {
+        self.navigationController.navigationBar.hidden = NO;
+
+    }
+    
+}
+
+- (void)checkTopView {
+    if (self.currentIndex >= self.dataArray.count) return;
+    
+    PhotoModel *model = self.dataArray[self.currentIndex];
+    self.selectedBtn.selected = model.selectedIndex > 0;
+    
+    if (model.selectedIndex > 0) {
+        self.selectedBtn.backgroundColor = [UIColor greenColor];
+        self.selectedBtn.layer.borderWidth = 0;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
+        
+    } else {
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        self.selectedBtn.layer.borderWidth = 1;
+        [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
+    }
+}
+
+//MARK: - collectionViewDatasource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PhotoModel *model = self.dataArray[indexPath.row];
+    PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellID forIndexPath:indexPath];
+    cell.model = model;
+    return cell;
+}
+
+//MARK: - collectionViewDelegate
+
+//MARK: - scrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (![scrollView isEqual:self.collectionView]) return;
+    
+    self.currentIndex = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
+    
+    [self checkTopView];
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (![scrollView isEqual:self.collectionView]) return;
+
+    if (!decelerate) {
+        self.currentIndex = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
+
+        [self checkTopView];
+    }
+}
+
+- (void)addSubview {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectedBtn];
+    
+    self.view.backgroundColor = [UIColor blackColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+    tap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:tap];
+    
+    CGFloat confirmWidth = [@"确定" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
+    [self.bottomView addSubview:self.confirmBtn];
+    self.confirmBtn.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds)-confirmWidth-15, 14.5, confirmWidth, 22);
+    self.confirmBtn.enabled = NO;
+    
+    [self.view addSubview:self.collectionView];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView setContentOffset:CGPointMake((CGRectGetWidth([UIScreen mainScreen].bounds)+20)*self.currentIndex, 0)];
+
+        [self checkTopView];
+    });
+    
+    [self.view addSubview:self.bottomView];
+    self.bottomView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-52, CGRectGetWidth([UIScreen mainScreen].bounds), 52);
+}
+
+//MARK: - getter
+- (UICollectionViewFlowLayout *)layout {
+    if (!_layout) {
+        _layout = [[UICollectionViewFlowLayout alloc] init];
+        _layout.minimumLineSpacing = 20;
+        _layout.minimumInteritemSpacing = 0;
+        _layout.itemSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+        _layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    }
+    return _layout;
+}
+
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, CGRectGetWidth([UIScreen mainScreen].bounds)+20, CGRectGetHeight([UIScreen mainScreen].bounds)) collectionViewLayout:self.layout];
+        _collectionView.backgroundColor = [UIColor redColor];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.pagingEnabled = YES;
+        [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:PhotoCellID];
+    }
+    return _collectionView;
+}
+
+- (UIButton *)selectedBtn {
+    if (!_selectedBtn) {
+        _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_selectedBtn addTarget:self action:@selector(photoSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
+        _selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        _selectedBtn.layer.cornerRadius = 15;
+        _selectedBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        _selectedBtn.layer.borderWidth = 1;
+        _selectedBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_selectedBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    }
+    return _selectedBtn;
+}
+
+- (UIButton *)confirmBtn {
+    if (!_confirmBtn) {
+        _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:@"确定" forState:UIControlStateDisabled];
+        [_confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_confirmBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        _confirmBtn.enabled = NO;
+        _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    }
+    return _confirmBtn;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+    }
+    return _bottomView;
+}
 
 @end

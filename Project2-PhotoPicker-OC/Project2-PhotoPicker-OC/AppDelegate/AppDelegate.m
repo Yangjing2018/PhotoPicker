@@ -23,6 +23,14 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MainController new]];
     [self.window makeKeyAndVisible];
     
+    UINavigationBar * nav = [UINavigationBar appearance];
+    nav.barTintColor = [UIColor colorWithWhite:0 alpha:0.7];
+    nav.tintColor = [UIColor whiteColor];
+    nav.barStyle = UIBarStyleDefault;
+    nav.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                NSFontAttributeName : [UIFont systemFontOfSize:17]};
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     return YES;
 }
 

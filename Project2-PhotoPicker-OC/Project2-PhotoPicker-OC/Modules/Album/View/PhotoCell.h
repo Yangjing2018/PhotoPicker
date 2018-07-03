@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoModel.h"
+#define PhotoCellID @"PhotoCellID"
 
 @interface PhotoCell : UICollectionViewCell
+
+@property (nonatomic, strong) PhotoModel *model;
+
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @end

@@ -10,4 +10,10 @@
 
 @interface PhotoPerviewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
+@property (nonatomic, strong) NSMutableArray *selectArray;
+
+@property (nonatomic, assign) NSInteger currentIndex;
+
 @end

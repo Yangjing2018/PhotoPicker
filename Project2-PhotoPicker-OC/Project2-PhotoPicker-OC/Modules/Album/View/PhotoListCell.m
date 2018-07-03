@@ -56,7 +56,7 @@
     self.selectedBtn = ({
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn addTarget:self action:@selector(photoSelected:) forControlEvents:UIControlEventTouchUpInside];
-        btn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        btn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         btn.layer.cornerRadius = 12;
         btn.layer.borderColor = [UIColor whiteColor].CGColor;
         btn.layer.borderWidth = 1;
@@ -71,12 +71,12 @@
     self.selectedBtn.selected = model.selectedIndex > 0;
     
     if (model.selectedIndex > 0) {
-        self.selectedBtn.backgroundColor = [UIColor blueColor];
+        self.selectedBtn.backgroundColor = [UIColor greenColor];
         self.selectedBtn.layer.borderWidth = 0;
         [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
         
     } else {
-        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         self.selectedBtn.layer.borderWidth = 1;
         [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
     }
@@ -90,7 +90,7 @@
     self.selectedBtn.selected = selectedIndex > 0;
     
     if (selectedIndex > 0) {
-        self.selectedBtn.backgroundColor = [UIColor blueColor];
+        self.selectedBtn.backgroundColor = [UIColor greenColor];
         self.selectedBtn.layer.borderWidth = 0;
         [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)selectedIndex] forState:UIControlStateSelected];
         
@@ -106,7 +106,7 @@
         }
 
     } else {
-        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         self.selectedBtn.layer.borderWidth = 1;
         [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
     }

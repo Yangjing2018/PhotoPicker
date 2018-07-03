@@ -10,6 +10,7 @@
 #import "PhotoPickerManager.h"
 #import "MJRefresh.h"
 #import "PhotoListCell.h"
+#import "PhotoPerviewController.h"
 
 #define MAXPHOTOCOUNT   9
 
@@ -27,7 +28,7 @@
 
 @property (nonatomic, strong) UIButton *previewBtn;
 
-@property (nonatomic, strong) UIButton *albumList;
+@property (nonatomic, strong) UIButton *confirmBtn;
 
 @property (nonatomic, strong) MJRefreshAutoFooter *refreshFooter;
 
@@ -43,9 +44,7 @@
     
     self.title = self.model.title;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction)];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(doneAction)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction)];
     _page = 1;
     [self getData];
     [self addSubViews];
@@ -68,18 +67,20 @@
 }
 
 //MARK: - private methods
-- (void)doneAction {
+- (void)doneAction:(UIButton *)btn {
 }
 
 - (void)dismissAction {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)popAction {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)previewAction:(UIButton *)btn {
+    PhotoPerviewController *subVC = [[PhotoPerviewController alloc] init];
+    subVC.selectArray = self.selectedArray;
+    subVC.dataArray = self.selectedArray;
+    subVC.currentIndex = 0;
+    [self.navigationController pushViewController:subVC animated:YES];
+    
 }
 
 - (void)refreshBottomView {
@@ -87,15 +88,17 @@
         NSString *previewTitle = [NSString stringWithFormat:@"预览(%ld)", (long)self.selectedArray.count];
         [self.previewBtn setTitle:previewTitle forState:UIControlStateNormal];
         CGFloat previewBtnWidth = [previewTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
-        self.previewBtn.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds)-previewBtnWidth-15, CGRectGetHeight([UIScreen mainScreen].bounds)-22-14.5, previewBtnWidth, 22);
+        self.previewBtn.frame = CGRectMake(15, 14.5, previewBtnWidth, 22);
 
         self.previewBtn.enabled = YES;
+        self.confirmBtn.enabled = YES;
 
     } else {
         self.previewBtn.enabled = NO;
-        
+        self.confirmBtn.enabled = NO;
+
         CGFloat previewBtnWidth = [@"预览" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
-        self.previewBtn.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds)-previewBtnWidth-15, CGRectGetHeight([UIScreen mainScreen].bounds)-22-14.5, previewBtnWidth, 22);
+        self.previewBtn.frame = CGRectMake(15, 14.5, previewBtnWidth, 22);
     }
 }
 
@@ -169,6 +172,12 @@
 
 //MARK: - collectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PhotoPerviewController *subVC = [[PhotoPerviewController alloc] init];
+    subVC.selectArray = self.selectedArray;
+    subVC.dataArray = self.dataArray;
+    subVC.currentIndex = indexPath.row;
+    [self.navigationController pushViewController:subVC animated:YES];
 }
 
 - (void)addSubViews {
@@ -176,15 +185,23 @@
     
     [self.view addSubview:self.collectionView];
     
-    CGFloat previewBtnWidth = [@"预览" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
-    [self.view addSubview:self.previewBtn];
-    self.previewBtn.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds)-previewBtnWidth-15, CGRectGetHeight([UIScreen mainScreen].bounds)-22-14.5, previewBtnWidth, 22);
+    UIView *bottomView = ({
+        UIView *view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+        view;
+    });
+    [self.view addSubview:bottomView];
+    bottomView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-52, CGRectGetWidth([UIScreen mainScreen].bounds), 52);
     
-    CGFloat albumListWidth = [@"选择相册" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
-    [self.view addSubview:self.albumList];
-    self.albumList.frame = CGRectMake(15, CGRectGetHeight([UIScreen mainScreen].bounds)-22-14.5, albumListWidth, 22);
+    CGFloat previewBtnWidth = [@"预览" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
+    [bottomView addSubview:self.previewBtn];
+    self.previewBtn.frame = CGRectMake(15, 14.5, previewBtnWidth, 22);
+    
+    CGFloat confirmWidth = [@"确定" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
+    [bottomView addSubview:self.confirmBtn];
+    self.confirmBtn.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds)-confirmWidth-15, 14.5, confirmWidth, 22);
+    self.confirmBtn.enabled = NO;
 }
-
 
 //MARK: - getter
 - (MJRefreshAutoFooter *)refreshFooter {
@@ -225,8 +242,8 @@
         _previewBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_previewBtn setTitle:@"预览" forState:UIControlStateNormal];
         [_previewBtn setTitle:@"预览" forState:UIControlStateDisabled];
-        [_previewBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        _previewBtn.alpha = 0.6;
+        [_previewBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_previewBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         _previewBtn.enabled = NO;
         _previewBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_previewBtn addTarget:self action:@selector(previewAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -234,16 +251,18 @@
     return _previewBtn;
 }
 
-- (UIButton *)albumList {
-    if (!_albumList) {
-        _albumList = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_albumList setTitle:@"选择相册" forState:UIControlStateNormal];
-        [_albumList setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        _albumList.enabled = YES;
-        _albumList.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_albumList addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+- (UIButton *)confirmBtn {
+    if (!_confirmBtn) {
+        _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [_confirmBtn setTitle:@"确定" forState:UIControlStateDisabled];
+        [_confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_confirmBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        _confirmBtn.enabled = NO;
+        _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_confirmBtn addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _albumList;
+    return _confirmBtn;
 }
 
 - (NSMutableArray *)dataArray {
