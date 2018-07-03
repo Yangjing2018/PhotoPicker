@@ -10,10 +10,19 @@
 #import "PhotoModel.h"
 #define PhotoCellID @"PhotoCellID"
 
+@class PhotoCell;
+@protocol PhotoCellDelegate <NSObject>
+
+- (void)photoCell:(PhotoCell *)cell singleTapAction:(UITapGestureRecognizer *)tap;
+
+@end
+
 @interface PhotoCell : UICollectionViewCell
 
 @property (nonatomic, strong) PhotoModel *model;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
+
+@property (nonatomic, weak) id <PhotoCellDelegate> delegate;
 
 @end

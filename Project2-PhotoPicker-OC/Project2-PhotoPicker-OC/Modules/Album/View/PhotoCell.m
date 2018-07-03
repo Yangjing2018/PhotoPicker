@@ -31,9 +31,16 @@
     _backScrollView.contentSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     [self.contentView addSubview:_backScrollView];
     
-    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScaleAction:)];
-    tap1.numberOfTapsRequired = 2;
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAction:)];
+    tap1.numberOfTapsRequired = 1;
     [_backScrollView addGestureRecognizer:tap1];
+    
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScaleAction:)];
+    tap2.numberOfTapsRequired = 2;
+    [_backScrollView addGestureRecognizer:tap2];
+
+    //当单击操作遇到了 双击 操作时，单击失效
+    [tap1 requireGestureRecognizerToFail:tap2];
     
     _photoView = ({
         UIImageView *imageView = [UIImageView new];
@@ -76,15 +83,22 @@
     }
 }
 
+- (void)singleTapAction:(UITapGestureRecognizer *)tap {
+    if (!self.delegate) return;
+    if (![self.delegate respondsToSelector:@selector(photoCell:singleTapAction:)]) return;
+    [self.delegate photoCell:self singleTapAction:tap];
+}
+
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return _photoView;
 }
 
 // 让UIImageView在UIScrollView缩放后居中显示
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+
     CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
     (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
-    
+
     CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
     (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
     _photoView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,

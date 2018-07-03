@@ -6,11 +6,11 @@
 //  Copyright © 2018年 YangJing. All rights reserved.
 //
 
-#import "PhotoCell.h"
 
 #import "PhotoPerviewController.h"
+#import "PhotoCell.h"
 
-@interface PhotoPerviewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PhotoPerviewController () <UICollectionViewDelegate, UICollectionViewDataSource, PhotoCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
@@ -42,24 +42,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 //MARK: - private methods
 - (void)photoSelectedAction:(UIButton *)btn {
-    
-}
-
-- (void)tapAction:(UITapGestureRecognizer *)tap {
-    self.bottomView.hidden = !self.bottomView.hidden;
-
-    if (self.bottomView.hidden) {
-        self.navigationController.navigationBar.hidden = YES;
-
-    } else {
-        self.navigationController.navigationBar.hidden = NO;
-
-    }
     
 }
 
@@ -81,6 +67,19 @@
     }
 }
 
+//MARK: - photocellDelegate
+- (void)photoCell:(PhotoCell *)cell singleTapAction:(UITapGestureRecognizer *)tap {
+    self.bottomView.hidden = !self.bottomView.hidden;
+    
+    if (self.bottomView.hidden) {
+        self.navigationController.navigationBar.hidden = YES;
+        
+    } else {
+        self.navigationController.navigationBar.hidden = NO;
+        
+    }
+}
+
 //MARK: - collectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -90,6 +89,7 @@
     PhotoModel *model = self.dataArray[indexPath.row];
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellID forIndexPath:indexPath];
     cell.model = model;
+    cell.delegate = self;
     return cell;
 }
 
@@ -119,9 +119,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectedBtn];
     
     self.view.backgroundColor = [UIColor blackColor];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-    tap.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:tap];
     
     CGFloat confirmWidth = [@"确定" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
     [self.bottomView addSubview:self.confirmBtn];
@@ -131,7 +128,7 @@
     [self.view addSubview:self.collectionView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView setContentOffset:CGPointMake((CGRectGetWidth([UIScreen mainScreen].bounds)+20)*self.currentIndex, 0)];
+        [self.collectionView setContentOffset:CGPointMake((CGRectGetWidth([UIScreen mainScreen].bounds)+20)*self.currentIndex, -64)];
 
         [self checkTopView];
     });
@@ -148,7 +145,7 @@
         _layout.minimumInteritemSpacing = 0;
         _layout.itemSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
         _layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        _layout.sectionInset = UIEdgeInsetsMake(-64, 10, 0, 10);
     }
     return _layout;
 }
