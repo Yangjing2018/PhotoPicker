@@ -8,9 +8,9 @@
 
 #import "MainController.h"
 #import "PhotoPickerManager.h"
-#import "AlbumListController.h"
+#import "PhotoPickerController.h"
 
-@interface MainController ()
+@interface MainController () <PhotoPickerDelegate>
 
 @end
 
@@ -31,7 +31,7 @@
 
 //MARK: - private methods
 - (void)albumAction:(id)sender {
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[AlbumListController new]] animated:YES completion:nil];
+    [self presentViewController:[[PhotoPickerController alloc] initWithDelegate:self maxCount:9] animated:YES completion:nil];
     
 }
 

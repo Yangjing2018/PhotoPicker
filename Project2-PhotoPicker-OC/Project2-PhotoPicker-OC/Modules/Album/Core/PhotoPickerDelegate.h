@@ -11,6 +11,7 @@
 
 @protocol PhotoPickerDelegate <NSObject>
 
+@optional
 /**
  *  完成选择图片
  */

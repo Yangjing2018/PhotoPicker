@@ -79,6 +79,10 @@
                 albumModel.collection = collection;
                 albumModel.fetchResult = fetchResult;
                 [_albumDatasArray addObject:albumModel];
+                
+                if (collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary) {
+                    self.defaultAlbum = albumModel;
+                }
             }
             
             if (idx == _albumDatasArray.count-1) {
@@ -160,6 +164,7 @@
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
     option.resizeMode = PHImageRequestOptionsResizeModeExact;
+    option.networkAccessAllowed = YES;
     [self loadImageWithAssets:asset targetSize:targetSize option:option success:success];
 }
 
@@ -169,6 +174,7 @@
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
     option.resizeMode = PHImageRequestOptionsResizeModeFast;
+    option.networkAccessAllowed = YES;
     [self loadImageWithAssets:asset targetSize:targetSize option:option success:success];
 }
 
@@ -177,6 +183,7 @@
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     option.resizeMode = PHImageRequestOptionsResizeModeExact;
+    option.networkAccessAllowed = YES;
     [self loadImageWithAssets:asset targetSize:targetSize option:option success:success];
 
 }

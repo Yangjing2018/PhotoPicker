@@ -13,6 +13,8 @@
 
 @interface PhotoPickerManager : NSObject
 
+@property (nonatomic, strong) AlbumModel *defaultAlbum;
+
 @property (nonatomic, copy, readonly) NSArray *albumArray;
 
 + (PhotoPickerManager *)manager;

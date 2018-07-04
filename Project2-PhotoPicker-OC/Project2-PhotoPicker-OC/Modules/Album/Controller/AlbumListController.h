@@ -12,12 +12,15 @@
 
 @interface AlbumListController : UIViewController
 
-//@property (nonatomic, strong) AlbumModel *model;
-//
-//@property (nonatomic, assign) NSInteger maxCount;
-//
-//@property (nonatomic, weak) id <PhotoPickerDelegate> delegate;
-//
-//- (instancetype)initWithMaxCount:(NSInteger)maxCount;
+@property (nonatomic, assign) NSInteger maxCount;
+
+@property (nonatomic, weak) id <PhotoPickerDelegate> delegate;
+
+/**
+ *  初始化
+ *  delegate ： 代理
+ *  maxCount ： 最多可选择相片数
+ */
+- (instancetype)initWithDelegate:(id<PhotoPickerDelegate>)delegate maxCount:(NSInteger)maxCount;
 
 @end

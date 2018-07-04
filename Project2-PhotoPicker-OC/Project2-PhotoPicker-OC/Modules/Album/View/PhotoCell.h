@@ -25,4 +25,6 @@
 
 @property (nonatomic, weak) id <PhotoCellDelegate> delegate;
 
+- (void)setCellZoomScale:(CGFloat)zoomScale animated:(BOOL)animated;
+
 @end

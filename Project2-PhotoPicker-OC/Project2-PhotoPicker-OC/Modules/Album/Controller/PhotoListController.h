@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AlbumModel.h"
+#import "PhotoPickerDelegate.h"
 
 @interface PhotoListController : UIViewController
+
+@property (nonatomic, assign) NSInteger maxCount;
+
+@property (nonatomic, weak) id <PhotoPickerDelegate> delegate;
 
 @property (nonatomic, strong) AlbumModel *model;
 

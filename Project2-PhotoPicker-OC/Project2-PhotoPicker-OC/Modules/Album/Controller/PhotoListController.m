@@ -12,8 +12,6 @@
 #import "PhotoListCell.h"
 #import "PhotoPerviewController.h"
 
-#define MAXPHOTOCOUNT   9
-
 @interface PhotoListController () <UICollectionViewDelegate, UICollectionViewDataSource, PhotoListCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -51,6 +49,10 @@
 }
 
 //MARK: - data
+- (void)getAlbumData {
+    
+}
+
 - (void)getData {
     [[PhotoPickerManager manager] photosWithFetch:self.model.fetchResult Page:_page Limit:100 Success:^(NSArray *result) {
         [self.dataArray addObjectsFromArray:result];
@@ -106,7 +108,9 @@
 - (void)photoListCell:(PhotoListCell *)cell didSelectePhoto:(PhotoModel *)model {
     
     if (cell.selectedIndex > 0) {
+        NSInteger currentIndex = 0;
         if ([self.selectedArray containsObject:model]) {
+            currentIndex = [self.selectedArray indexOfObject:model];
             [self.selectedArray removeObject:model];
             
         } else {
@@ -115,7 +119,7 @@
         
         cell.selectedIndex = 0;
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0, count = self.selectedArray.count; i < count; i++) {
+        for (NSInteger i = currentIndex, count = self.selectedArray.count; i < count; i++) {
             PhotoModel *selecteModel = self.selectedArray[i];
             selecteModel.selectedIndex = i+1;
             
@@ -124,7 +128,7 @@
                 [indexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
             }
         }
-        if (self.selectedArray.count >= MAXPHOTOCOUNT-1) {
+        if (self.selectedArray.count >= self.maxCount-1) {
             [self.collectionView reloadData];
 
         } else {
@@ -137,15 +141,15 @@
             NSLog(@"yangjing_%@: data error", NSStringFromClass([self class]));
 
         } else {
-            if (self.selectedArray.count >= MAXPHOTOCOUNT) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"一次最多选择%d张图片", MAXPHOTOCOUNT] preferredStyle:UIAlertControllerStyleAlert];
+            if (self.selectedArray.count >= self.maxCount) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"一次最多选择%ld张图片", (long)self.maxCount] preferredStyle:UIAlertControllerStyleAlert];
                 [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil]];
                 [self presentViewController:alert animated:YES completion:nil];
                 return;
                 
             } else {
                 [self.selectedArray addObject:model];
-                if (self.selectedArray.count >= MAXPHOTOCOUNT) {
+                if (self.selectedArray.count >= self.maxCount) {
                     [self.collectionView reloadData];
                 }
             }
@@ -165,7 +169,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoListCellID forIndexPath:indexPath];
     cell.delegate = self;
-    cell.shouldMask = self.selectedArray.count >= MAXPHOTOCOUNT;
+    cell.shouldMask = self.selectedArray.count >= self.maxCount;
     cell.model = self.dataArray[indexPath.row];
     return cell;
 }

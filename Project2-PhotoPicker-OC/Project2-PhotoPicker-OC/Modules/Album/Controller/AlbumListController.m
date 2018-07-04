@@ -21,13 +21,37 @@
 
 @implementation AlbumListController
 
+- (instancetype)initWithDelegate:(id<PhotoPickerDelegate>)delegate maxCount:(NSInteger)maxCount {
+    self = [super init];
+    if (self) {
+        self.maxCount = maxCount;
+        self.delegate = delegate;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"相册";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
-    [self getData];
+    
+    [[PhotoPickerManager manager] allAlbumsIfRefresh:YES success:^(NSArray<AlbumModel *> *result) {
+        [self.tableView reloadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addSubViews];
+
+            PhotoListController *subVC = [[PhotoListController alloc] init];
+            subVC.model = [PhotoPickerManager manager].defaultAlbum;
+            subVC.delegate = self.delegate;
+            subVC.maxCount = self.maxCount;
+            [self.navigationController pushViewController:subVC animated:NO];
+        });
+    } failure:^{
+        [self addSubViews];
+
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -37,18 +61,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-}
-
-//MARK: - get data
-- (void)getData {
-    [[PhotoPickerManager manager] allAlbumsIfRefresh:YES success:^(NSArray<AlbumModel *> *result) {
-        [self addSubViews];
-
-    } failure:^{
-        [self addSubViews];
-
-    }];
     
 }
 

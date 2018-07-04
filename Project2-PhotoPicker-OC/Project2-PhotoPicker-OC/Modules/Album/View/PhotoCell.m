@@ -57,7 +57,6 @@
         _photoView.image = [UIImage imageNamed:@"default_pic"];
     }
     
-    //TODO: - 原图逻辑
     if (model.orgImage) {
         _photoView.image = model.orgImage;
         
@@ -71,6 +70,11 @@
             });
         }];
     }
+}
+
+- (void)setCellZoomScale:(CGFloat)zoomScale animated:(BOOL)animated {
+    [_backScrollView setZoomScale:zoomScale animated:animated];
+
 }
 
 - (void)zoomScaleAction:(UITapGestureRecognizer *)tap {
