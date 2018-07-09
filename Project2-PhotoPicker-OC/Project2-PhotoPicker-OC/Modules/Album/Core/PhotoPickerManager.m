@@ -143,10 +143,9 @@
                 [photos addObject:model];
                 
             } else if (asset.mediaType == PHAssetMediaTypeVideo) {
-                //                VideoModel *model = [[VideoModel alloc] init];
-                //                model.asset = asset;
-                //                model.duration = asset.duration;
-                //                [photos addObject:model];
+//                PhotoModel *model = [PhotoModel new];
+//                model.asset = asset;
+//                [photos addObject:model];
                 
             }
             if (i == (photoCount-1) && success) {

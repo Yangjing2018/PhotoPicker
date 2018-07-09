@@ -87,6 +87,8 @@
 
     PhotoListController *subVC = [[PhotoListController alloc] init];
     subVC.model = self.dataArray[indexPath.row];
+    subVC.delegate = self.delegate;
+    subVC.maxCount = self.maxCount;
     [self.navigationController pushViewController:subVC animated:YES];
 }
 

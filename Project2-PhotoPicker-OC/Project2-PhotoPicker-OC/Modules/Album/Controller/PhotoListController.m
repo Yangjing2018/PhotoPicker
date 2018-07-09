@@ -81,6 +81,8 @@
     subVC.selectArray = self.selectedArray;
     subVC.dataArray = self.selectedArray;
     subVC.currentIndex = 0;
+    subVC.maxCount = self.maxCount;
+    subVC.delegate = self.delegate;
     [self.navigationController pushViewController:subVC animated:YES];
     
 }
@@ -181,6 +183,8 @@
     subVC.selectArray = self.selectedArray;
     subVC.dataArray = self.dataArray;
     subVC.currentIndex = indexPath.row;
+    subVC.maxCount = self.maxCount;
+    subVC.delegate = self.delegate;
     [self.navigationController pushViewController:subVC animated:YES];
 }
 

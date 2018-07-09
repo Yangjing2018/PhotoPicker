@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoPickerDelegate.h"
 
 @interface PhotoPerviewController : UIViewController
+
+@property (nonatomic, assign) NSInteger maxCount;
+
+@property (nonatomic, weak) id <PhotoPickerDelegate> delegate;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 

@@ -54,11 +54,18 @@
 //MARK: - private methods
 - (void)photoSelectedAction:(UIButton *)btn {
     if (self.currentIndex >= self.dataArray.count) return;
+    
     PhotoModel *model = self.dataArray[self.currentIndex];
     if (model.selectedIndex > 0) {
+        NSInteger index = 0;
         if ([self.selectArray containsObject:model]) {
+            index = [self.selectArray indexOfObject:model];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+
             [self.selectArray removeObject:model];
-            
+            [self.thumCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+            self.thumCollectionView.hidden = self.selectArray.count <= 0;
+
         } else {
             NSLog(@"yangjing_%@: data error", NSStringFromClass([self class]));
         }
@@ -66,9 +73,52 @@
         self.selectedBtn.selected = NO;
         model.selectedIndex = 0;
         
+        for (NSInteger i = index, count = self.selectArray.count; i < count; i++) {
+            PhotoModel *selecteModel = self.selectArray[i];
+            selecteModel.selectedIndex = i+1;
+        }
+        
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        self.selectedBtn.layer.borderWidth = 1;
+        [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
+        
     } else {
+        if (self.selectArray.count >= self.maxCount) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"一次最多选择%ld张图片", (long)self.maxCount] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            return;
+            
+        }
+        
+        NSInteger index = 0;
+        if (![self.selectArray containsObject:model]) {
+            [self.selectArray addObject:model];
+            
+            index = [self.selectArray indexOfObject:model];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+            [self.thumCollectionView insertItemsAtIndexPaths:@[indexPath]];
+            self.thumCollectionView.hidden = NO;
+            
+        } else {
+            NSLog(@"yangjing_%@: data error", NSStringFromClass([self class]));
+        }
+        
         self.selectedBtn.selected = YES;
         model.selectedIndex = self.selectArray.count;
+        
+        self.selectedBtn.backgroundColor = [UIColor greenColor];
+        self.selectedBtn.layer.borderWidth = 0;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
+        
+        self.selectedBtn.transform = CGAffineTransformMakeScale(0, 0);
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.selectedBtn.transform = CGAffineTransformIdentity;
+            
+        } completion:^(BOOL finished) {
+            self.selectedBtn.transform = CGAffineTransformIdentity;
+            
+        }];
     }
     
 }
@@ -102,6 +152,10 @@
         self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         self.selectedBtn.layer.borderWidth = 1;
         [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
+        
+        //thumCollectionView 联动
+        self.selectedThumbnailCell.isSelected = NO;
+        self.selectedThumbnailCell = nil;
     }
 }
 
@@ -206,7 +260,6 @@
 
 - (void)addSubview {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectedBtn];
-    
     self.view.backgroundColor = [UIColor blackColor];
     
     CGFloat confirmWidth = [@"确定" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
