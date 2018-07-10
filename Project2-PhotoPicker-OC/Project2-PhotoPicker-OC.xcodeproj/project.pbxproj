@@ -14,6 +14,8 @@
 		39729E40209C4E1600273496 /* PhotoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E3F209C4E1600273496 /* PhotoListCell.m */; };
 		39729E43209C560200273496 /* VideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E42209C560200273496 /* VideoListCell.m */; };
 		39729E46209C629F00273496 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E45209C629F00273496 /* PhotoCell.m */; };
+		3972EB9E20F352A800F3DD10 /* MainDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3972EB9D20F352A800F3DD10 /* MainDisplayController.m */; };
+		3972EBA120F3534C00F3DD10 /* MainDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3972EBA020F3534C00F3DD10 /* MainDisplayView.m */; };
 		3993D818205F87FF00B15D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80B205F87FE00B15D90 /* Assets.xcassets */; };
 		3993D819205F87FF00B15D90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80C205F87FE00B15D90 /* LaunchScreen.storyboard */; };
 		3993D81A205F87FF00B15D90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80E205F87FE00B15D90 /* Main.storyboard */; };
@@ -67,6 +69,10 @@
 		39729E42209C560200273496 /* VideoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoListCell.m; sourceTree = "<group>"; };
 		39729E44209C629F00273496 /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		39729E45209C629F00273496 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		3972EB9C20F352A800F3DD10 /* MainDisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainDisplayController.h; sourceTree = "<group>"; };
+		3972EB9D20F352A800F3DD10 /* MainDisplayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainDisplayController.m; sourceTree = "<group>"; };
+		3972EB9F20F3534C00F3DD10 /* MainDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainDisplayView.h; sourceTree = "<group>"; };
+		3972EBA020F3534C00F3DD10 /* MainDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainDisplayView.m; sourceTree = "<group>"; };
 		3993D80B205F87FE00B15D90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3993D80D205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3993D80F205F87FE00B15D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -338,6 +344,8 @@
 			children = (
 				3993D82D205F89B200B15D90 /* MainController.h */,
 				3993D82E205F89B200B15D90 /* MainController.m */,
+				3972EB9C20F352A800F3DD10 /* MainDisplayController.h */,
+				3972EB9D20F352A800F3DD10 /* MainDisplayController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -352,6 +360,8 @@
 		3993D82C205F899C00B15D90 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3972EB9F20F3534C00F3DD10 /* MainDisplayView.h */,
+				3972EBA020F3534C00F3DD10 /* MainDisplayView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -571,7 +581,9 @@
 				3993D847205F9E1200B15D90 /* PhotoPerviewController.m in Sources */,
 				39729E43209C560200273496 /* VideoListCell.m in Sources */,
 				396E871C20EC9AD30023F430 /* PhotoThumbnailCell.m in Sources */,
+				3972EBA120F3534C00F3DD10 /* MainDisplayView.m in Sources */,
 				3993D83D205F9D1F00B15D90 /* VideoModel.m in Sources */,
+				3972EB9E20F352A800F3DD10 /* MainDisplayController.m in Sources */,
 				3993D83A205F9CF500B15D90 /* AlbumModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
