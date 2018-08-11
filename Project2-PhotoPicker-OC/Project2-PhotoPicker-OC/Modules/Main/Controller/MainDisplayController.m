@@ -21,6 +21,8 @@
 }
 
 - (void)addSubview {
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     
 }
 
