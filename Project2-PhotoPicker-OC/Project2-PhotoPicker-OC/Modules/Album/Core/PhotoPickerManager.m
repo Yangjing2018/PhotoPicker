@@ -63,32 +63,35 @@
         PHFetchResult *systemResult = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
         if (systemResult.count == 0) {
             dispatch_semaphore_signal(semaphore);
-        }
-        
-        [systemResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            PHAssetCollection *collection = (PHAssetCollection *)obj;
-
-            PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
-            // 按图片生成时间排序
-            photosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-            PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:photosOptions];
-            if (fetchResult.count > 0) {
-                AlbumModel *albumModel = [[AlbumModel alloc] init];
-                albumModel.title = collection.localizedTitle;
-                albumModel.photoCount = fetchResult.count;
-                albumModel.collection = collection;
-                albumModel.fetchResult = fetchResult;
-                [_albumDatasArray addObject:albumModel];
-                
-                if (collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary) {
-                    self.defaultAlbum = albumModel;
-                }
-            }
             
-            if (idx == _albumDatasArray.count-1) {
-                dispatch_semaphore_signal(semaphore);
-            }
-        }];
+        } else {
+            [systemResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                PHAssetCollection *collection = (PHAssetCollection *)obj;
+                
+                PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
+                // 按图片生成时间排序
+                photosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+                PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:photosOptions];
+                if (fetchResult.count > 0) {
+                    AlbumModel *albumModel = [[AlbumModel alloc] init];
+                    albumModel.title = collection.localizedTitle;
+                    albumModel.photoCount = fetchResult.count;
+                    albumModel.collection = collection;
+                    albumModel.fetchResult = fetchResult;
+                    [_albumDatasArray addObject:albumModel];
+                    
+                    if (collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary) {
+                        self.defaultAlbum = albumModel;
+                    }
+                } else {
+                    dispatch_semaphore_signal(semaphore);
+                }
+                
+                if (idx == _albumDatasArray.count-1) {
+                    dispatch_semaphore_signal(semaphore);
+                }
+            }];
+        }
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 
@@ -96,26 +99,30 @@
         PHFetchResult *userResult = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
         if (userResult.count == 0) {
             dispatch_semaphore_signal(semaphore);
-        }
-        [userResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            PHAssetCollection *collection = (PHAssetCollection *)obj;
-            PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
-            // 按图片生成时间排序
-            photosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-            PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:photosOptions];
-            if (fetchResult.count > 0) {
-                AlbumModel *albumModel = [[AlbumModel alloc] init];
-                albumModel.title = collection.localizedTitle;
-                albumModel.photoCount = fetchResult.count;
-                albumModel.collection = collection;
-                albumModel.fetchResult = fetchResult;
-                [_albumDatasArray addObject:albumModel];
-            }
             
-            if (idx == _albumDatasArray.count-1) {
-                dispatch_semaphore_signal(semaphore);
-            }
-        }];
+        } else {
+            [userResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                PHAssetCollection *collection = (PHAssetCollection *)obj;
+                PHFetchOptions *photosOptions = [[PHFetchOptions alloc] init];
+                // 按图片生成时间排序
+                photosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+                PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:photosOptions];
+                if (fetchResult.count > 0) {
+                    AlbumModel *albumModel = [[AlbumModel alloc] init];
+                    albumModel.title = collection.localizedTitle;
+                    albumModel.photoCount = fetchResult.count;
+                    albumModel.collection = collection;
+                    albumModel.fetchResult = fetchResult;
+                    [_albumDatasArray addObject:albumModel];
+                } else {
+                    dispatch_semaphore_signal(semaphore);
+                }
+                
+                if (idx == _albumDatasArray.count-1) {
+                    dispatch_semaphore_signal(semaphore);
+                }
+            }];
+        }
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 

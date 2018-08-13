@@ -94,6 +94,8 @@
 
 //MARK: - configSubviews
 - (void)addSubViews {
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:self.tableView];
 }
 
