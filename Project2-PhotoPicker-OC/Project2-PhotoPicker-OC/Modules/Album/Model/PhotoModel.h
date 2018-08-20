@@ -32,4 +32,9 @@
  */
 @property (nonatomic, assign) NSInteger selectedIndex;
 
+/**
+ *  是否存在iCloud上
+ */
+@property (nonatomic, assign) BOOL inICloud;
+
 @end
