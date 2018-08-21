@@ -32,7 +32,7 @@
     });
     [self.contentView addSubview:photoImage];
     
-    CGFloat itemWidth = (CGRectGetWidth([UIScreen mainScreen].bounds)-2*3)/4.0;
+    CGFloat itemWidth = PhotoListCellWidth;
     photoImage.frame = CGRectMake(0, 0, itemWidth, itemWidth);
 
     CGFloat scale = CGRectGetWidth([UIScreen mainScreen].bounds) == 320 ? 2 : 3;

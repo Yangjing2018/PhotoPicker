@@ -12,6 +12,8 @@
 #import "PhotoListCell.h"
 #import "PhotoPerviewController.h"
 
+#import "MainDisplayController.h"
+
 @interface PhotoListController () <UICollectionViewDelegate, UICollectionViewDataSource, PhotoListCellDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -70,6 +72,9 @@
 
 //MARK: - private methods
 - (void)doneAction:(UIButton *)btn {
+    MainDisplayController *subVC = [[MainDisplayController alloc] init];
+    subVC.dataArray = self.selectedArray;
+    [self.navigationController pushViewController:subVC animated:YES];
 }
 
 - (void)dismissAction {
@@ -225,7 +230,7 @@
         _layout.minimumLineSpacing = 2;
         _layout.minimumInteritemSpacing = 2;
         
-        CGFloat itemWidth = (CGRectGetWidth([UIScreen mainScreen].bounds)-2*3)/4.0;
+        CGFloat itemWidth = PhotoListCellWidth;
         _layout.itemSize = CGSizeMake(itemWidth, itemWidth);
         _layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);

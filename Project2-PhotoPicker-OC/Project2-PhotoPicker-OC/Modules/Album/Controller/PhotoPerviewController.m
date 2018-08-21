@@ -10,6 +10,7 @@
 #import "PhotoPerviewController.h"
 #import "PhotoCell.h"
 #import "PhotoThumbnailCell.h"
+#import "MainDisplayController.h"
 
 @interface PhotoPerviewController () <UICollectionViewDelegate, UICollectionViewDataSource, PhotoCellDelegate>
 
@@ -52,6 +53,12 @@
 }
 
 //MARK: - private methods
+- (void)doneAction:(id)sender {
+    MainDisplayController *subVC = [[MainDisplayController alloc] init];
+    subVC.dataArray = self.dataArray;
+    [self.navigationController pushViewController:subVC animated:YES];
+}
+
 - (void)photoSelectedAction:(UIButton *)btn {
     if (self.currentIndex >= self.dataArray.count) return;
     
@@ -78,7 +85,7 @@
             selecteModel.selectedIndex = i+1;
         }
         
-        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
         self.selectedBtn.layer.borderWidth = 1;
         [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
         
@@ -148,7 +155,7 @@
         }
         
     } else {
-        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
         self.selectedBtn.layer.borderWidth = 1;
         [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
         
@@ -235,7 +242,7 @@
                 [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
 
             } else {
-                self.selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+                self.selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
                 self.selectedBtn.layer.borderWidth = 1;
                 [self.selectedBtn setTitle:@"" forState:UIControlStateNormal];
             }
@@ -259,6 +266,8 @@
 
 - (void)addSubview {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectedBtn];
+    self.selectedBtn.layer.cornerRadius = CGRectGetHeight(self.selectedBtn.frame)/2.0;
+
     self.view.backgroundColor = [UIColor blackColor];
     
     CGFloat confirmWidth = [@"确定" boundingRectWithSize:CGSizeMake(MAXFLOAT, 22) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.width;
@@ -334,8 +343,8 @@
     if (!_selectedBtn) {
         _selectedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_selectedBtn addTarget:self action:@selector(photoSelectedAction:) forControlEvents:UIControlEventTouchUpInside];
-        _selectedBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-        _selectedBtn.layer.cornerRadius = 15;
+        _selectedBtn.frame = CGRectMake(0, 0, 30, 30);
+        _selectedBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
         _selectedBtn.layer.borderColor = [UIColor whiteColor].CGColor;
         _selectedBtn.layer.borderWidth = 1;
         _selectedBtn.titleLabel.font = [UIFont systemFontOfSize:16];

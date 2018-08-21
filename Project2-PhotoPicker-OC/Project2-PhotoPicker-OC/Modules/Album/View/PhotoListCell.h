@@ -10,6 +10,9 @@
 #import "PhotoModel.h"
 #define PhotoListCellID @"PhotoListCellID"
 
+#define PhotoListCellWidth ((CGRectGetWidth([UIScreen mainScreen].bounds)-2*3)/4.0)
+
+
 @class PhotoListCell;
 @protocol PhotoListCellDelegate <NSObject>
 
