@@ -9,6 +9,7 @@
 #import "MainController.h"
 #import "PhotoPickerManager.h"
 #import "PhotoPickerController.h"
+#import "MainDisplayController.h"
 
 @interface MainController () <PhotoPickerDelegate>
 
@@ -37,6 +38,16 @@
 
 - (void)cameraAction:(id)sender {
     
+}
+
+//MARK: - PhotoPickerDelegate
+- (void)photoPickerControllerDidCancel:(UIViewController *)picker {}
+
+- (void)photoPickerController:(UIViewController *)picker didFinishPickingPhotos:(NSArray *)photos {
+    
+    MainDisplayController *subVC = [[MainDisplayController alloc] init];
+    subVC.dataArray = [photos mutableCopy];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:subVC] animated:NO completion:nil];
 }
 
 - (void)addSubView {

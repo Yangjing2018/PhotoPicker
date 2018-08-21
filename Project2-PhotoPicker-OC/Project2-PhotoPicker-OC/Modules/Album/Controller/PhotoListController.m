@@ -72,13 +72,30 @@
 
 //MARK: - private methods
 - (void)doneAction:(UIButton *)btn {
-    MainDisplayController *subVC = [[MainDisplayController alloc] init];
-    subVC.dataArray = self.selectedArray;
-    [self.navigationController pushViewController:subVC animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    if (self.selectedArray.count > 0) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerController:didFinishPickingPhotos:)]) {
+            [self.delegate photoPickerController:self didFinishPickingPhotos:self.selectedArray];
+
+        }
+
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerControllerDidCancel:)]) {
+            [self.delegate photoPickerControllerDidCancel:self];
+        }
+    }
+
 }
 
 - (void)dismissAction {
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerControllerDidCancel:)]) {
+        [self.delegate photoPickerControllerDidCancel:self];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)previewAction:(UIButton *)btn {

@@ -54,9 +54,29 @@
 
 //MARK: - private methods
 - (void)doneAction:(id)sender {
-    MainDisplayController *subVC = [[MainDisplayController alloc] init];
-    subVC.dataArray = self.dataArray;
-    [self.navigationController pushViewController:subVC animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    if (self.selectArray.count > 0) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerController:didFinishPickingPhotos:)]) {
+            [self.delegate photoPickerController:self didFinishPickingPhotos:self.selectArray];
+        }
+        
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerControllerDidCancel:)]) {
+            [self.delegate photoPickerControllerDidCancel:self];
+        }
+        
+    }
+
+}
+
+- (void)dismissAction {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerControllerDidCancel:)]) {
+        [self.delegate photoPickerControllerDidCancel:self];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)photoSelectedAction:(UIButton *)btn {
@@ -362,6 +382,7 @@
         [_confirmBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         _confirmBtn.enabled = NO;
         _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_confirmBtn addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmBtn;
 }
