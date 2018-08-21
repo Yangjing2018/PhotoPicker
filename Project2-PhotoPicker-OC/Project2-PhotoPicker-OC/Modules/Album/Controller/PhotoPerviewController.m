@@ -134,7 +134,7 @@
         self.selectedBtn.selected = YES;
         model.selectedIndex = self.selectArray.count;
         
-        self.selectedBtn.backgroundColor = [UIColor greenColor];
+        self.selectedBtn.backgroundColor = [UIColor colorWithRed:113/255.0 green:211/255.0 blue:51/255.0 alpha:1];
         self.selectedBtn.layer.borderWidth = 0;
         [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
         
@@ -156,7 +156,7 @@
     self.selectedBtn.selected = model.selectedIndex > 0;
     
     if (model.selectedIndex > 0) {
-        self.selectedBtn.backgroundColor = [UIColor greenColor];
+        self.selectedBtn.backgroundColor = [UIColor colorWithRed:113/255.0 green:211/255.0 blue:51/255.0 alpha:1];
         self.selectedBtn.layer.borderWidth = 0;
         [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
         
@@ -257,7 +257,7 @@
             self.selectedBtn.selected = model.selectedIndex > 0;
             
             if (model.selectedIndex > 0) {
-                self.selectedBtn.backgroundColor = [UIColor greenColor];
+                self.selectedBtn.backgroundColor = [UIColor colorWithRed:113/255.0 green:211/255.0 blue:51/255.0 alpha:1];
                 self.selectedBtn.layer.borderWidth = 0;
                 [self.selectedBtn setTitle:[NSString stringWithFormat:@"%ld", (long)model.selectedIndex] forState:UIControlStateSelected];
 
