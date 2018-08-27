@@ -66,6 +66,10 @@
 
 //MARK: - private methods
 - (void)dismiss {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoPickerControllerDidCancel:)]) {
+        [self.delegate photoPickerControllerDidCancel:self];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

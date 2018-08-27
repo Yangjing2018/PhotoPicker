@@ -43,6 +43,51 @@
         });
     }];
     
+    if (model.asset.mediaType == PHAssetMediaTypeVideo) {
+        UIImageView *playIcon = ({
+            UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"preview-play"]];
+            view.contentMode = UIViewContentModeScaleAspectFill;
+            view;
+        });
+        [self.contentView addSubview:playIcon];
+        playIcon.frame = CGRectMake(0, 0, itemWidth/4, itemWidth/4);
+        playIcon.center = self.contentView.center;
+        
+        //渐变蒙层
+        UIView *durationBackView = ({
+            UIView *view = [[UIView alloc] init];
+            view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
+            view;
+        });
+        [self.contentView addSubview:durationBackView];
+        durationBackView.frame = CGRectMake(0, itemWidth/3*2, itemWidth, itemWidth/3);
+        
+        UIColor *color1 = [UIColor colorWithWhite:0 alpha:0];
+        UIColor *color2 = [UIColor colorWithWhite:0 alpha:0.2];
+        UIColor *color3 = [UIColor colorWithWhite:0 alpha:0.5];
+        NSArray *colors = [NSArray arrayWithObjects:(id)color1.CGColor, color2.CGColor,color3.CGColor, nil];
+        NSArray *locations = [NSArray arrayWithObjects:@(0.0), @(0.4),@(1.0), nil];
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.colors = colors;
+        gradientLayer.locations = locations;
+        gradientLayer.frame = durationBackView.bounds;
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint   = CGPointMake(0, 1);
+        durationBackView.layer.mask = gradientLayer;
+        
+        UILabel *durationLabel = ({
+            UILabel *label = [[UILabel alloc] init];
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:12];
+            label.textAlignment = NSTextAlignmentRight;
+            label.backgroundColor = [UIColor clearColor];
+            label.text = [[NSString alloc] initWithFormat:@"%02ld:%02ld", (long)model.asset.duration/60,  (long)model.asset.duration%60];
+            label;
+        });
+        [self.contentView addSubview:durationLabel];
+        durationLabel.frame = CGRectMake(0, itemWidth/3*2, itemWidth-5, itemWidth/3);
+    }
+    
     if (self.shouldMask && model.selectedIndex <= 0) {
         UIView *coverView = ({
             UIView *view = [[UIView alloc] init];

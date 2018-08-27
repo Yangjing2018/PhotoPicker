@@ -34,7 +34,10 @@
 
 @end
 
-@implementation PhotoPerviewController
+@implementation PhotoPerviewController {
+    //是否监听scrollViewDelegate，load页面时，设置偏移会触发scrollViewDelegate，造成currentIndex不准确
+    BOOL _scrollViewDelegateEnable;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -276,6 +279,7 @@
 //MARK: - scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (![scrollView isEqual:self.collectionView]) return;
+    if (!_scrollViewDelegateEnable) return;
     
     NSInteger index = scrollView.contentOffset.x/CGRectGetWidth([UIScreen mainScreen].bounds);
     if (labs(self.currentIndex - index) != 1) return;
@@ -296,18 +300,21 @@
     self.confirmBtn.enabled = NO;
     
     [self.view addSubview:self.collectionView];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView setContentOffset:CGPointMake((CGRectGetWidth([UIScreen mainScreen].bounds)+20)*self.currentIndex, -64)];
 
-        [self checkTopView];
-    });
-    
     [self.view addSubview:self.thumCollectionView];
     self.thumCollectionView.hidden = self.selectArray.count <= 0;
     
     [self.view addSubview:self.bottomView];
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-52, CGRectGetWidth([UIScreen mainScreen].bounds), 52);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView setContentOffset:CGPointMake((CGRectGetWidth([UIScreen mainScreen].bounds)+20)*self.currentIndex, -64)];
+        
+        [self checkTopView];
+        
+        _scrollViewDelegateEnable = YES;
+    });
+    
 }
 
 //MARK: - getter

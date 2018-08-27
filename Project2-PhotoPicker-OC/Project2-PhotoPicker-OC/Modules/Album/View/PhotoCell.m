@@ -23,6 +23,8 @@
     _model = model;
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+    self.contentView.backgroundColor = [UIColor blackColor];
+    
     _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds))];
     _backScrollView.backgroundColor = [UIColor blackColor];
     _backScrollView.delegate = self;
@@ -78,12 +80,26 @@
 }
 
 - (void)zoomScaleAction:(UITapGestureRecognizer *)tap {
-    if (_backScrollView.zoomScale > 1) {
+    if (_backScrollView.zoomScale != 1) {
         [_backScrollView setZoomScale:1 animated:YES];
         
     } else {
-        [_backScrollView setZoomScale:2 animated:YES];
+        CGFloat photoWidth = self.model.asset.pixelWidth;
+        CGFloat photoHeight = self.model.asset.pixelHeight;
+        
+        CGFloat targetWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+        CGFloat targetHeight = CGRectGetHeight([UIScreen mainScreen].bounds);
+        
+        CGFloat widthScale = photoWidth/targetWidth;
+        CGFloat heightScale = photoHeight/targetHeight;
+        
+        if (widthScale < heightScale) {
+            [_backScrollView setZoomScale:widthScale animated:YES];
 
+        } else {
+            [_backScrollView setZoomScale:heightScale animated:YES];
+
+        }
     }
 }
 

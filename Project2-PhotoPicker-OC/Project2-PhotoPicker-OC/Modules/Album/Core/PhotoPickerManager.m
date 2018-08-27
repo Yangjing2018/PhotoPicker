@@ -76,7 +76,7 @@
                 if (fetchResult.count > 0) {
                     AlbumModel *albumModel = [[AlbumModel alloc] init];
                     albumModel.title = collection.localizedTitle;
-                    albumModel.photoCount = fetchResult.count;
+                    albumModel.photoCount = [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeVideo] + [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeImage];
                     albumModel.collection = collection;
                     albumModel.fetchResult = fetchResult;
                     [_albumDatasArray addObject:albumModel];
@@ -114,7 +114,7 @@
                 if (fetchResult.count > 0) {
                     AlbumModel *albumModel = [[AlbumModel alloc] init];
                     albumModel.title = collection.localizedTitle;
-                    albumModel.photoCount = fetchResult.count;
+                    albumModel.photoCount = [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeVideo] + [fetchResult countOfAssetsWithMediaType:PHAssetMediaTypeImage];
                     albumModel.collection = collection;
                     albumModel.fetchResult = fetchResult;
                     [_albumDatasArray addObject:albumModel];
@@ -150,15 +150,10 @@
         
         for (NSInteger i = 0; i < photoCount; i++) {
             PHAsset *asset = [fetchResult objectAtIndex:i+(page-1)*limit];
-            if (asset.mediaType == PHAssetMediaTypeImage) {
+            if (asset.mediaType == PHAssetMediaTypeImage || asset.mediaType == PHAssetMediaTypeVideo) {
                 PhotoModel *model = [PhotoModel new];
                 model.asset = asset;
                 [photos addObject:model];
-                
-            } else if (asset.mediaType == PHAssetMediaTypeVideo) {
-//                PhotoModel *model = [PhotoModel new];
-//                model.asset = asset;
-//                [photos addObject:model];
                 
             }
             if (i == (photoCount-1) && success) {
@@ -209,6 +204,25 @@
     
     if (targetSize.width == 0 && targetSize.height == 0) {
         targetSize = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
+        
+    } else {
+        
+        CGFloat photoWidth = asset.pixelWidth;
+        CGFloat photoHeight = asset.pixelHeight;
+        
+        CGFloat targetWidth = targetSize.width;
+        CGFloat targetHeight = targetSize.height;
+        
+        CGFloat widthScale = photoWidth/targetWidth;
+        CGFloat heightScale = photoHeight/targetHeight;
+
+        if (widthScale < heightScale) {
+            targetSize = CGSizeMake(targetWidth, targetWidth/photoWidth*photoHeight);
+
+        } else {
+            targetSize = CGSizeMake(targetHeight, photoWidth/photoHeight*targetHeight);
+
+        }
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
