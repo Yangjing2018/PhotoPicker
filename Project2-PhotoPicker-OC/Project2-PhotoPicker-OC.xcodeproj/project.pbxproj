@@ -10,10 +10,10 @@
 		390D575A212BBC0A00C5E9B4 /* MainDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 390D5759212BBC0A00C5E9B4 /* MainDisplayCell.m */; };
 		39413881205BC4A800CE1C7F /* Project2_PhotoPicker_OCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 39413880205BC4A800CE1C7F /* Project2_PhotoPicker_OCTests.m */; };
 		3941388C205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3941388B205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m */; };
+		39668DF221339E540055D86F /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39668DF121339E540055D86F /* VideoCell.m */; };
 		396E871C20EC9AD30023F430 /* PhotoThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 396E871B20EC9AD30023F430 /* PhotoThumbnailCell.m */; };
 		39729E3D209C375800273496 /* AlbumListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E3C209C375800273496 /* AlbumListCell.m */; };
 		39729E40209C4E1600273496 /* PhotoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E3F209C4E1600273496 /* PhotoListCell.m */; };
-		39729E43209C560200273496 /* VideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E42209C560200273496 /* VideoListCell.m */; };
 		39729E46209C629F00273496 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39729E45209C629F00273496 /* PhotoCell.m */; };
 		3972EB9E20F352A800F3DD10 /* MainDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3972EB9D20F352A800F3DD10 /* MainDisplayController.m */; };
 		3993D818205F87FF00B15D90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3993D80B205F87FE00B15D90 /* Assets.xcassets */; };
@@ -61,14 +61,14 @@
 		39413887205BC4A800CE1C7F /* Project2-PhotoPicker-OCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project2-PhotoPicker-OCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3941388B205BC4A800CE1C7F /* Project2_PhotoPicker_OCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Project2_PhotoPicker_OCUITests.m; sourceTree = "<group>"; };
 		3941388D205BC4A800CE1C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39668DF021339E540055D86F /* VideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		39668DF121339E540055D86F /* VideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
 		396E871A20EC9AD30023F430 /* PhotoThumbnailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoThumbnailCell.h; sourceTree = "<group>"; };
 		396E871B20EC9AD30023F430 /* PhotoThumbnailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoThumbnailCell.m; sourceTree = "<group>"; };
 		39729E3B209C375800273496 /* AlbumListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumListCell.h; sourceTree = "<group>"; };
 		39729E3C209C375800273496 /* AlbumListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumListCell.m; sourceTree = "<group>"; };
 		39729E3E209C4E1600273496 /* PhotoListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoListCell.h; sourceTree = "<group>"; };
 		39729E3F209C4E1600273496 /* PhotoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoListCell.m; sourceTree = "<group>"; };
-		39729E41209C560200273496 /* VideoListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoListCell.h; sourceTree = "<group>"; };
-		39729E42209C560200273496 /* VideoListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoListCell.m; sourceTree = "<group>"; };
 		39729E44209C629F00273496 /* PhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		39729E45209C629F00273496 /* PhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		3972EB9C20F352A800F3DD10 /* MainDisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainDisplayController.h; sourceTree = "<group>"; };
@@ -272,10 +272,10 @@
 				39729E3C209C375800273496 /* AlbumListCell.m */,
 				39729E3E209C4E1600273496 /* PhotoListCell.h */,
 				39729E3F209C4E1600273496 /* PhotoListCell.m */,
-				39729E41209C560200273496 /* VideoListCell.h */,
-				39729E42209C560200273496 /* VideoListCell.m */,
 				39729E44209C629F00273496 /* PhotoCell.h */,
 				39729E45209C629F00273496 /* PhotoCell.m */,
+				39668DF021339E540055D86F /* VideoCell.h */,
+				39668DF121339E540055D86F /* VideoCell.m */,
 				396E871A20EC9AD30023F430 /* PhotoThumbnailCell.h */,
 				396E871B20EC9AD30023F430 /* PhotoThumbnailCell.m */,
 			);
@@ -568,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3993D81D205F87FF00B15D90 /* AppDelegate.m in Sources */,
+				39668DF221339E540055D86F /* VideoCell.m in Sources */,
 				39729E40209C4E1600273496 /* PhotoListCell.m in Sources */,
 				3993D841205F9DA000B15D90 /* AlbumListController.m in Sources */,
 				3993D837205F9CC700B15D90 /* PhotoModel.m in Sources */,
@@ -579,7 +580,6 @@
 				3993D844205F9DDE00B15D90 /* PhotoListController.m in Sources */,
 				3993D81B205F87FF00B15D90 /* main.m in Sources */,
 				3993D847205F9E1200B15D90 /* PhotoPerviewController.m in Sources */,
-				39729E43209C560200273496 /* VideoListCell.m in Sources */,
 				396E871C20EC9AD30023F430 /* PhotoThumbnailCell.m in Sources */,
 				3993D83D205F9D1F00B15D90 /* VideoModel.m in Sources */,
 				3972EB9E20F352A800F3DD10 /* MainDisplayController.m in Sources */,

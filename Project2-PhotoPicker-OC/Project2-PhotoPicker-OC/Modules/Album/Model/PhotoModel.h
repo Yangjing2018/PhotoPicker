@@ -17,6 +17,11 @@
 @property (nonatomic, strong) PHAsset *asset;
 
 /**
+ *  视频资源
+ */
+@property (nonatomic, strong) AVAsset *avAsset;
+
+/**
  *  缩略图
  */
 @property (nonatomic, strong) UIImage *thumImage;

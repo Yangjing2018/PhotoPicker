@@ -54,4 +54,9 @@
  */
 - (void)loadImageWithAssets:(PHAsset *)asset targetSize:(CGSize)targetSize option:(PHImageRequestOptions *)option success:(void(^)(UIImage *result))success;
 
+/**
+ *  加载视频资源
+ */
+- (void)loadVideoWithAssets:(PHAsset *)asset progress:(PHAssetVideoProgressHandler)progressBlock success:(void(^)(AVAsset *asset))success failure:(void(^)(NSDictionary *info))failure;
+
 @end

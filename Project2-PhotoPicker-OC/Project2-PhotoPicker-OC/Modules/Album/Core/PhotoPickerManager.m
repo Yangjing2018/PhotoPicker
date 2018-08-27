@@ -239,6 +239,30 @@
     });
 }
 
+//MARK: - load video
+- (void)loadVideoWithAssets:(PHAsset *)asset progress:(PHAssetVideoProgressHandler)progressBlock success:(void(^)(AVAsset *asset))success failure:(void(^)(NSDictionary *info))failure {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PHVideoRequestOptions *options = [PHVideoRequestOptions new];
+        options.deliveryMode = PHVideoRequestOptionsDeliveryModeHighQualityFormat;
+        options.networkAccessAllowed = YES;
+        options.progressHandler = ^(double progress, NSError * _Nullable error, BOOL * _Nonnull stop, NSDictionary * _Nullable info) {
+            if (progressBlock) progressBlock(progress, error, stop, info);
+        };
+        
+        [_imageManager requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            if (asset) {
+                if (success) success(asset);
+                
+            } else {
+                if (failure) failure(info);
+                
+            }
+            
+        }];
+    });
+}
+
 //MARK: - getter
 - (NSArray *)albumArray {
     return _albumDatasArray;
