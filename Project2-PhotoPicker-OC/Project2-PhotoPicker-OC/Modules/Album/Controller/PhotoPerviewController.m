@@ -24,8 +24,6 @@
 
 @property (nonatomic, strong) PhotoThumbnailCell *selectedThumbnailCell;
 
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
-
 @property (nonatomic, strong) UIButton *selectedBtn;
 
 @property (nonatomic, strong) UIView *bottomView;
